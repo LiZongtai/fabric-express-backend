@@ -1,9 +1,11 @@
 import express from 'express';
-import { Server } from './Server';
+import { FabricServer } from './FabricServer';
+
 
 // rest of the code remains same
 const app = express();
 const PORT = 8081;
+
 const DBconfig = {
   db:"postgreSQL",
   host:"localhost",
@@ -14,10 +16,10 @@ const DBconfig = {
   max: 20,
   idleTimeoutMillis: 3000,
 }
-let server =new Server(DBconfig);
+const fabricServer =new FabricServer(DBconfig);
 
 async function startServer(){
-  server.init();
+  fabricServer.initialize();
 }
 startServer();
 
