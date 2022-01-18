@@ -81,7 +81,7 @@ export class PgService {
 		// don't log password
 		const connectionString = `postgres://${this.pgconfig.username}:******@${this.pgconfig.host}:${this.pgconfig.port}/${this.pgconfig.database}`;
 		this.client = new Client(this.pgconfig);
-		console.log(`connecting to Postgresql ${connectionString}`);
+		console.log(`Successfully connected to Postgresql ${connectionString}`);
 
 	}
 

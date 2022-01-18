@@ -6,6 +6,6 @@ export class Server{
         this.config=config;
     }
     async init(){
-        this.persistence = await PersistenceFactory.create("postgreSQL",this.config);
+        this.persistence = await PersistenceFactory.create(this.config.db,this.config);
     }
 }

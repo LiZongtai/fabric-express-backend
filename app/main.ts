@@ -4,7 +4,8 @@ import { Server } from './Server';
 // rest of the code remains same
 const app = express();
 const PORT = 8081;
-const config = {
+const DBconfig = {
+  db:"postgreSQL",
   host:"localhost",
   username: "hppoc",
   database: "fabricexplorer",
@@ -13,7 +14,7 @@ const config = {
   max: 20,
   idleTimeoutMillis: 3000,
 }
-let server =new Server(config);
+let server =new Server(DBconfig);
 
 async function startServer(){
   server.init();
