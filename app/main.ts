@@ -1,6 +1,8 @@
 import express from 'express';
 import { FabricServer } from './FabricServer';
-
+import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 
 // rest of the code remains same
 const app = express();
@@ -19,14 +21,18 @@ const DBconfig = {
 const fabricServer =new FabricServer(DBconfig);
 
 async function startServer(){
-  fabricServer.initialize();
+  app.use(bodyParser.json());
+  app.use(
+    bodyParser.urlencoded({
+      extended: true
+    })
+  );
+  fabricServer.initialize(app);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.listen(PORT, () => {
+    console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+  });
+  
 }
 startServer();
 
-app.get('/', async (req, res) =>{
-  res.send('Express + TypeScript Server');
-} 
-);
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
-});

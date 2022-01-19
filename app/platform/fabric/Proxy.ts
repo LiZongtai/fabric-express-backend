@@ -149,6 +149,7 @@ async changeChannel(network_id, channel_genesis_hash) {
  * @memberof Proxy
  */
 async getChannelsInfo(network_id) {
+
     const client = this.platform.getClient(network_id);
     const channels = await this.persistence
         .getCrudService()

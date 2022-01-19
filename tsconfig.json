@@ -1,11 +1,12 @@
 {
-  "include": ["app/"],
+  "include": ["app/", "app/platform/fabric/**/*.json"],
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
     "rootDir": "app/",
     "outDir": "./build",
     "esModuleInterop": true,
-    "strict": false
+    "strict": false,
+    "resolveJsonModule": true
   }
 }
