@@ -1,17 +1,19 @@
 # Fabric-Express-Backend
-Based on [rocketchat-url]:https://chat.hyperledger.org/channel/hyperledger-explorer
+Based on [blockchain-explorer](https://github.com/hyperledger/blockchain-explorer).
 ## Prerequisites
 ### dependcies
-* Node 14 (tested with v14.18.2)
-* Fabric
-* PostgreSQL 9.5 or greater (tested with v13.4 ubuntu)
+* Node 14 (tested with v14.18.2).
+* Hyperledger Fabric 2.2+ (tested with v2.3.3).
+* PostgreSQL 9.5 or greater (tested with v13.4 ubuntu).
 * Node Dependcies:
     `npm install -g nodemon`  
     `npm install pm2 -g`
 ### start fabric network
+[Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-2.3/test_network.html)
 Just do it.
 ### set host
-* This is a temp solution of an Unresolved issues.
+* This is a temp solution to an Unresolved issues.  
+
 Set host in `/etc/hosts`.
 For example,
 ```
