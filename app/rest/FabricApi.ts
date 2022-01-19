@@ -71,7 +71,6 @@ router.get('/channels/info', (req, res) => {
  */
 router.get('/peersStatus/:channel', (req, res) => {
     const channelName = req.params.channel;
-    console.log(channelName);
     if (channelName) {
         proxy.getPeersStatus(networkId, channelName).then((data: any) => {
             res.send({ status: 200, peers: data });

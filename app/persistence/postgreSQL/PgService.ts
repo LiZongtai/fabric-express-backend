@@ -43,7 +43,6 @@ export class PgService {
 		username: any;
 		passwd: any;
 	}) {
-		console.log(pgconfig);
 		this.pgconfig = pgconfig;
 		this.pgconfig.host = process.env.DATABASE_HOST || pgconfig.host;
 		this.pgconfig.port = process.env.DATABASE_PORT || pgconfig.port;
@@ -73,9 +72,8 @@ export class PgService {
 			 */
 			const { rejectUnauthorized, requestCert } = this.pgconfig.ssl;
 			const printConfig = { rejectUnauthorized, requestCert };
-			console.log('SSL to Postgresql enabled with settings: ', printConfig);
 		} else {
-			console.log('SSL to Postgresql disabled');
+			console.debug('SSL to Postgresql disabled');
 		}
 
 		// don't log password
@@ -175,7 +173,6 @@ export class PgService {
 			const updatesqlflagstr = updatesqlflag.join(',');
 			const addSql = `INSERT INTO ${tablename}  ( ${updatesqlparmstr} ) VALUES( ${updatesqlflagstr}  ) RETURNING *;`;
 			console.debug(`Insert sql is ${addSql}`);
-			//   Console.log(`Insert sql is ${addSql}`);
 			this.client.query(addSql, addSqlParams, (err, res) => {
 				if (err) {
 					console.error('[INSERT ERROR] - ', err.message);
@@ -359,8 +356,6 @@ export class PgService {
 					reject(err);
 					return;
 				}
-
-				// Console.log(  `The solution is: ${rows.length }  `  );
 				console.debug(' the getRowByPk ');
 				if (res && res.rows && res.rows[0]) {
 					resolve(res.rows[0]);

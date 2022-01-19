@@ -132,7 +132,7 @@ export class FabricGateway {
 			}
             // Connect to gateway
 			await this.gateway.connect(this.config, connectionOptions);
-            console.log("connecting to fabric gateway");
+            console.log("connecting to fabric gateway...");
         } catch (error) {
             console.error(
                 `${explorerError.ERROR_1010}: ${JSON.stringify(error, null, 2)}`
@@ -254,7 +254,6 @@ export class FabricGateway {
      }
 
     async queryChannels() {
-        console.log(this.defaultChannelName);
 		const network = await this.gateway.getNetwork(this.defaultChannelName);
 
 		// Get the contract from the network.
@@ -368,7 +367,6 @@ export class FabricGateway {
 			const discoverer = new Discoverer(`be discoverer ${peer}`, client, mspID);
 			const url = this.config.peers[peer].url;
 			const pem = this.fabricConfig.getPeerTlsCACertsPem(peer);
-			console.log("[Gateway] pem:",pem);
 			let grpcOpt = {};
 			if ('grpcOptions' in this.config.peers[peer]) {
 				grpcOpt = this.config.peers[peer].grpcOptions;
