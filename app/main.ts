@@ -1,24 +1,16 @@
 import express from 'express';
 import { FabricServer } from './FabricServer';
+import { explorerConst } from './common/ExplorerConst';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
+import ServerConfig from './ServerConfig.json';
 
 // rest of the code remains same
 const app = express();
-const PORT = 8081;
+const PORT = ServerConfig["port"];
 
-const DBconfig = {
-  db: "postgreSQL",
-  host: "localhost",
-  username: "hppoc",
-  database: "fabricexplorer",
-  passwd: "Fabric2022",
-  port: 5432,
-  max: 20,
-  idleTimeoutMillis: 3000,
-}
-const fabricServer = new FabricServer(DBconfig);
+const fabricServer = new FabricServer(ServerConfig);
 
 async function startServer() {
   app.use(bodyParser.json());

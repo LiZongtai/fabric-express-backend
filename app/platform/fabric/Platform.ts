@@ -6,7 +6,7 @@ import * as FabricUtils from './utils/FabricUtils';
 import { ExplorerError } from '../../common/ExplorerError';
 import { explorerError } from '../../common/ExplorerMessage';
 import { Proxy } from './Proxy';
-import { FabricServerListener } from './sync/listener/FabricServerListener';
+import { FabricServerListener } from '../../sync/listener/FabricServerListener';
 import { MetricService } from '../../persistence/fabric/MetricService';
 import { CRUDService } from '../../persistence/fabric/CRUDService';
 
@@ -20,7 +20,7 @@ export class Platform {
 	network_configs: Record<string, any>;
 	networks: Map<string, any>;
 	proxy: any;
-	explorerListeners: any[];
+	serverListeners: any[];
 
 	constructor(persistence) {
 		this.persistence = persistence;
@@ -28,7 +28,7 @@ export class Platform {
 		this.defaultNetwork = null;
 		this.networks = new Map();
 		this.proxy = null;
-		this.explorerListeners = [];
+		this.serverListeners = [];
 	}
 
 	async initialize() {
@@ -116,8 +116,8 @@ export class Platform {
 			if (network_client.getStatus()) {
 				const fabricServerListener = new FabricServerListener(this);
 				fabricServerListener.initialize([network_id, network_name, '1']);
-				// fabricServerListener.send('Successfully send a message to child process');
-				// this.explorerListeners.push(fabricServerListener);
+				fabricServerListener.send('Successfully send a message to child process');
+				this.serverListeners.push(fabricServerListener);
 			}
 		}
 		/* eslint-enable */

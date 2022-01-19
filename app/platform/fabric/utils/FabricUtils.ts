@@ -8,19 +8,49 @@ import { ExplorerError } from '../../../common/ExplorerError';
 import { explorerError } from '../../../common/ExplorerMessage';
 
 export async function createFabricClient(config, persistence?) {
-    // Create new FabricClient
-    const client = new FabricClient(config);
-    // Initialize fabric client
-    console.debug(
-        '************ Initializing fabric client for [%s]************',
-        config.getNetworkId()
-    );
-    try {
-        await client.initialize(persistence);
-        return client;
-    } catch (err) {
-        throw new ExplorerError(explorerError.ERROR_2014);
-    }
+	// Create new FabricClient
+	const client = new FabricClient(config);
+	// Initialize fabric client
+	console.debug(
+		'************ Initializing fabric client for [%s]************',
+		config.getNetworkId()
+	);
+	try {
+		await client.initialize(persistence);
+		return client;
+	} catch (err) {
+		throw new ExplorerError(explorerError.ERROR_2014);
+	}
+}
+
+/**
+ *
+ *
+ * @param {*} dateStr
+ * @returns
+ */
+export async function getBlockTimeStamp(dateStr) {
+	try {
+		return new Date(dateStr);
+	} catch (err) {
+		console.error(err);
+	}
+	return new Date(dateStr);
+}
+
+/**
+ *
+ *
+ * @returns
+ */
+export async function generateDir() {
+	const tempDir = `/tmp/${new Date().getTime()}`;
+	try {
+		fs.mkdirSync(tempDir);
+	} catch (err) {
+		console.error(err);
+	}
+	return tempDir;
 }
 
 /**
@@ -29,7 +59,7 @@ export async function createFabricClient(config, persistence?) {
  * @param {*} header
  * @returns
  */
- export async function generateBlockHash(header) {
+export async function generateBlockHash(header) {
 	const headerAsn = asn.define('headerAsn', function() {
 		this.seq().obj(
 			this.key('Number').int(),
@@ -56,7 +86,7 @@ export async function createFabricClient(config, persistence?) {
  * @param {*} config
  * @returns
  */
- export function getPEMfromConfig(config) {
+export function getPEMfromConfig(config) {
 	let result = null;
 	if (config) {
 		if (config.path) {
@@ -79,7 +109,7 @@ export async function createFabricClient(config, persistence?) {
  * @param {*} config_path
  * @returns
  */
- function readFileSync(config_path) {
+function readFileSync(config_path) {
 	try {
 		const config_loc = path.resolve(config_path);
 		const data = fs.readFileSync(config_loc);

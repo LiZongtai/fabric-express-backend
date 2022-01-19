@@ -1,7 +1,13 @@
+# Fabric-Express-Backend
+Based on [rocketchat-url]:https://chat.hyperledger.org/channel/hyperledger-explorer
 ## Prerequisites
 ### dependcies
 * Node 14 (tested with v14.18.2)
+* Fabric
 * PostgreSQL 9.5 or greater (tested with v13.4 ubuntu)
+* Node Dependcies:
+    `npm install -g nodemon`  
+    `npm install pm2 -g`
 ### start fabric network
 Just do it.
 ### set host
@@ -22,34 +28,37 @@ docker inspect [peer_container_name] | grep IPAddress
 $ cd app
 ```
 
-* Modify `app/explorerconfig.json` to update PostgreSQL database settings.
-
+* Modify `app/ServerConfig.json` to update PostgreSQL database settings.
     ```json
     "postgreSQL": {
         "host": "127.0.0.1",
         "port": "5432",
         "database": "fabricexplorer",
         "username": "hppoc",
-        "passwd": "Fabric2022"
+        "passwd": "yourpassword"
     }
     ```
 Then, run create database script:  
 * **Ubuntu**
-
     ```
     $ cd app/persistence/fabric/postgreSQL/db
     $ sudo -u postgres ./createdb.sh
     ```
-
 * **MacOS**
-
     ```
     $ cd app/persistence/fabric/postgreSQL/db
     $ ./createdb.sh
     ```
 ## Start App
+* **If Slient**
 ```
-npm install
+npm install \\ recommend cnpm install
+npm run build
+npm run pm2-start
+```
+* **If Watch Console**
+```
+npm install \\ recommend cnpm install
 npm run build
 npm start
 ```

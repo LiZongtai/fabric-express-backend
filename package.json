@@ -1,16 +1,20 @@
 {
-  "name": "server",
+  "name": "fabric-express-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "A HyperLedger Fabric Backend based on Express (TypeScript) and Fabric SDK Node",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon app/main.ts",
+    "pm2-start":"pm2 start build/main.js --name fabric-backend",
+    "start": "nodemon build/main.js",
     "build": "tsc --project ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "fabric nodesdk"
+  ],
+  "author": "Li Zongtai",
+  "email" : "lzt@tongji.edu.cn",
+  "license": "Apache-2.0",
   "lint-staged": {
     "**/*.{ts,js,jsx,json,css}": [
       "prettier --single-quote --write",

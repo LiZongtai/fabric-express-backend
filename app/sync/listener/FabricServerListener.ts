@@ -30,4 +30,27 @@ export class FabricServerListener {
 			this.syncListenerHandler.initialize(args);
 		}
 	}
+
+    /**
+	 *
+	 *
+	 * @param {*} message
+	 * @memberof ExplorerListener
+	 */
+	send(message) {
+		if (this.syncListenerHandler) {
+			this.syncListenerHandler.send({
+				message
+			});
+		}
+	}
+
+	/**
+	 *
+	 */
+	close() {
+		if (this.syncListenerHandler) {
+			this.syncListenerHandler.close();
+		}
+	}
 }

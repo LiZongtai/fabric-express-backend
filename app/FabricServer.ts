@@ -1,8 +1,7 @@
 import { PersistenceFactory } from './persistence/PersistenceFactory';
 import { PlatformBuilder } from './platform/PlatformBuilder';
 import Express from 'express';
-import { dbroutes } from './rest/dbroutes';
-import { platformroutes } from './rest/platformroutes';
+import { explorerConst } from './common/ExplorerConst';
 import {FabricApi} from './rest/FabricApi';
 
 
@@ -18,7 +17,7 @@ export class FabricServer {
 
 
     async initialize(app) {
-        this.persistence = await PersistenceFactory.create(this.config.db, this.config);
+        this.persistence = await PersistenceFactory.create(this.config[explorerConst.PERSISTENCE], this.config[this.config[explorerConst.PERSISTENCE]]);
         const platform = await PlatformBuilder.build(
             this.persistence,
         );
@@ -32,6 +31,7 @@ export class FabricServer {
         // await platformroutes(apirouter, platform);
         app.use('/api', this.router);
 
+        platform.initializeListener();
 
         this.platforms.push(platform);
     }
