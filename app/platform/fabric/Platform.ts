@@ -7,8 +7,9 @@ import { ExplorerError } from '../../common/ExplorerError';
 import { explorerError } from '../../common/ExplorerMessage';
 import { Proxy } from './Proxy';
 import { FabricServerListener } from './sync/listener/FabricServerListener';
-// import { MetricService } from '../../persistence/fabric/MetricService';
+import { MetricService } from '../../persistence/fabric/MetricService';
 import { CRUDService } from '../../persistence/fabric/CRUDService';
+
 
 const config_path = path.resolve(__dirname, './config.json');
 const fabric_const = FabricConst.fabric.const;
@@ -129,9 +130,9 @@ export class Platform {
 	 */
 		 setPersistenceService() {
 			// Setting platform specific CRUDService and MetricService
-			// this.persistence.setMetricService(
-			// 	new MetricService(this.persistence.getPGService())
-			// );
+			this.persistence.setMetricService(
+				new MetricService(this.persistence.getPGService())
+			);
 			this.persistence.setCrudService(
 				new CRUDService(this.persistence.getPGService())
 			);

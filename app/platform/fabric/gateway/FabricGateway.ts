@@ -77,7 +77,14 @@ export class FabricGateway {
                 console.debug(
                     `An identity for the admin user: ${explorerAdminId} already exists in the wallet`
                 );
-            } else {
+            } else if (this.fabricCaEnabled) {
+				console.info('CA enabled');
+
+				await this.enrollCaIdentity(
+					explorerAdminId,
+					this.fabricConfig.getAdminPassword()
+				);
+			} else {
                 /*
                  * Identity credentials to be stored in the wallet
                  * Look for signedCert in first-network-connection.json
@@ -361,6 +368,7 @@ export class FabricGateway {
 			const discoverer = new Discoverer(`be discoverer ${peer}`, client, mspID);
 			const url = this.config.peers[peer].url;
 			const pem = this.fabricConfig.getPeerTlsCACertsPem(peer);
+			console.log("[Gateway] pem:",pem);
 			let grpcOpt = {};
 			if ('grpcOptions' in this.config.peers[peer]) {
 				grpcOpt = this.config.peers[peer].grpcOptions;

@@ -2,9 +2,6 @@
  *    SPDX-License-Identifier: Apache-2.0
  */
 import { PgService } from '../postgreSQL/PgService';
-import { helper } from '../../common/helper';
-
-const logger = helper.getLogger('MetricService');
 
 /**
  *
@@ -152,7 +149,7 @@ export class MetricService {
 					c: any;
 					channel_genesis_hash: any;
 				}) => {
-					logger.debug(' item ------------> ', item);
+					console.debug(' item ------------> ', item);
 					txArray.push({
 						chaincodename: item.chaincodename,
 						channelName: item.channelname,
@@ -206,7 +203,7 @@ export class MetricService {
 			);
 			return cb(txArray);
 		} catch (err) {
-			logger.error(err);
+			console.error(err);
 			return cb([]);
 		}
 	}
@@ -271,7 +268,7 @@ export class MetricService {
 			);
 			return cb(data);
 		} catch (err) {
-			logger.error(err);
+			console.error(err);
 			return cb([]);
 		}
 	}
@@ -296,7 +293,7 @@ export class MetricService {
 			}
 			return peerArray;
 		} catch (err) {
-			logger.error(err);
+			console.error(err);
 			return cb([]);
 		}
 	}
@@ -313,7 +310,7 @@ export class MetricService {
 			const ordererArray = await this.getOrdererData(network_name);
 			return cb(ordererArray);
 		} catch (err) {
-			logger.error(err);
+			console.error(err);
 			return cb([]);
 		}
 	}
