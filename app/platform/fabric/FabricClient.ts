@@ -296,4 +296,8 @@ import { explorerError } from '../../common/ExplorerMessage';
 	getNetworkConfig() {
 		return this.config.getConfig();
 	}
+
+	getGateway(){
+		return this.fabricGateway;
+	}
 }

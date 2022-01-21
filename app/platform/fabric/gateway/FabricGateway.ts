@@ -469,4 +469,38 @@ export class FabricGateway {
 		}
 		return identityInfo;
 	}
+
+	//fabcar
+	async changeCarOwner(key, newOwner) {
+		const network = await this.gateway.getNetwork(this.defaultChannelName);
+
+		// Get the contract from the network.
+		const contract = network.getContract('fabcar');
+		const result = await contract.submitTransaction('changeCarOwner', key, newOwner);
+		const resultJson = fabprotos.protos.TransactionAction.decode(result);
+		console.debug('changeCarOwner', resultJson);
+		return resultJson;
+	}
+
+	async queryAllCars() {
+		const network = await this.gateway.getNetwork(this.defaultChannelName);
+
+		// Get the contract from the network.
+		const contract = network.getContract('fabcar');
+		const result = await contract.evaluateTransaction('queryAllCars');
+		const resultJson = JSON.parse(result.toString());
+		console.debug('queryAllCars', resultJson);
+		return resultJson;
+	}
+
+	async createCar(key, make, model, color, owner) {
+		const network = await this.gateway.getNetwork(this.defaultChannelName);
+
+		// Get the contract from the network.
+		const contract = network.getContract('fabcar');
+		const result = await contract.submitTransaction('createCar', key, make, model, color, owner);
+		const resultJson = fabprotos.protos.TransactionAction.decode(result);
+		console.debug('createCar', resultJson);
+		return resultJson;
+	}
 }
