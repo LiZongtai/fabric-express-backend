@@ -53,6 +53,7 @@ export class FabricGateway {
     }
 
     async initialize() {
+		// console.log(this.fabricConfig);
         this.fabricCaEnabled = this.fabricConfig.isFabricCaEnabled();
         this.tlsEnable = this.fabricConfig.getTls();
         this.enableAuthentication = this.fabricConfig.getEnableAuthentication();
