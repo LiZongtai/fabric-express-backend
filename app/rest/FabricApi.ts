@@ -503,14 +503,14 @@ export async function FabricApi(router, platform) {
 		const client = platform.getClient(networkId);
 		const gateway = client.getGateway();
 		gateway.changeCarOwner(req.params.key, req.params.newOwner);
-		res.send('changeCarOwner:' + req.params.key + ", " + req.params.newOwner);
+		res.send({ status: 200, data: "ok" });
 	});
 
 	router.get('/createCar/:key/:owner/:make/:model/:color', async (req, res) => {
 		const client = platform.getClient(networkId);
 		const gateway = client.getGateway();
-		gateway.createCar(req.params.key, req.params.owner,req.params.make,req.params.model,req.params.color);
-		res.send('createCar:' + req.params.key+","+req.params.owner+","+req.params.make+","+req.params.model+","+req.params.color);
+		gateway.createCar(req.params.key, req.params.make, req.params.model, req.params.color, req.params.owner);
+		res.send({ status: 200, data: "ok" });
 	});
 
 	router.get('/queryAllCars', async (req, res) => {

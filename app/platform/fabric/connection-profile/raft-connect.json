@@ -5,15 +5,15 @@
   "client": {
 		"tlsEnable": true,
     "adminCredential": {
-			"id": "exploreradmin",
-			"password": "exploreradminpw"
+			"id": "exploreradmin2",
+			"password": "exploreradminpw2"
 		},
     "caCredential":{
       "id": "admin",
       "password": "adminpw"
     },
 		"enableAuthentication": true,
-		"organization": "Org1",
+		"organization": "Org2",
 		"connection": {
 			"timeout": {
 				"peer": {
